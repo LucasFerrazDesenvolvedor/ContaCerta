@@ -24,15 +24,22 @@ class MesaController extends Controller
         return view('mesas.create');
     }
 
-    public function store(Request $request)
-    {
-        Mesa::create([
-            'numero' => $request->numero,
-            'status' => 'livre'
-        ]);
+ public function store(Request $request)
+{
+    $request->validate([
+        'nome' => 'required',
+        'numero' => 'required|unique:mesas,numero'
+    ]);
 
-        return redirect()->route('mesas.index');
-    }
+    Mesa::create([
+        'nome' => $request->nome,
+        'numero' => $request->numero,
+        'status' => 'livre'
+    ]);
+
+    return redirect()->route('mesas.index');
+}
+
 
     public function edit(Mesa $mesa)
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mesa extends Model
 {
-    protected $fillable = ['nome', 'status'];
+    protected $fillable = ['nome', 'numero', 'status'];
     public function comandas()
     {
         return $this->hasMany(Comanda::class);

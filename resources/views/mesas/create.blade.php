@@ -7,6 +7,7 @@
             @csrf
 
             <input type="text" name="numero" placeholder="Número da Mesa" required>
+            <input type="text" name="nome" placeholder="Nome da Mesa" required>
 
             <button type="submit">
                 Cadastrar
