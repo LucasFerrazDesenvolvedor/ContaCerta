@@ -28,6 +28,14 @@ Route::resource('mesas', MesaController::class)
 Route::resource('produtos', ProdutoController::class);
 Route::resource('comandas', ComandaController::class);
 
+Route::resource('comandas', ComandaController::class);
+
+Route::get('/comandas/abertas', [ComandaController::class, 'abertas'])
+    ->name('comandas.abertas');
+
+Route::get('/comandas/fechadas', [ComandaController::class, 'fechadas'])
+    ->name('comandas.fechadas');
+
 Route::post(
     '/comandas/adicionar-item',
     [ComandaController::class, 'adicionarItem']

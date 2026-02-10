@@ -72,19 +72,55 @@ class ComandaController extends Controller
         return $pdf->download('comanda.pdf');
     }
 
+    public function abertas()
+{
+    $comandas = Comanda::where('status', 'aberta')->get();
+
+    return view('comandas.abertas', compact('comandas'));
+}
+
+public function fechadas()
+{
+    $comandas = Comanda::where('status', 'fechada')->get();
+
+    return view('comandas.fechadas', compact('comandas'));
+}
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $comanda = Comanda::create([
-            'mesa_id' => $request->mesa_id,
-            'user_id' => Auth::id(),
-        ]);
+{
+    $request->validate([
+        'mesa_id' => 'required|exists:mesas,id',
+    ]);
 
-        return redirect()->route('comandas.show', $comanda);
-    }
+    // Criar comanda
+    $comanda = Comanda::create([
+        'mesa_id' => $request->mesa_id,
+        'user_id' => Auth::id(), // <-- AQUI ESTÁ A CORREÇÃO
+        'status' => 'aberta',
+        'total' => 0
+    ]);
+
+    // Atualizar mesa
+    Mesa::where('id', $request->mesa_id)
+        ->update(['status' => 'ocupada']);
+
+    return redirect()
+        ->route('comandas.show', $comanda->id)
+        ->with('success', 'Comanda aberta com sucesso!');
+}
+
+
+    public function create()
+{
+    $mesas = \App\Models\Mesa::where('status','livre')->get();
+
+    return view('comandas.create', compact('mesas'));
+}
+
 
     /**
      * Display the specified resource.

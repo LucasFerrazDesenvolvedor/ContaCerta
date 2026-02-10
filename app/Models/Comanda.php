@@ -9,9 +9,10 @@ class Comanda extends Model
     protected $fillable = [
         'mesa_id',
         'user_id',
-        'total',
-        'status'
+        'status',
+        'total'
     ];
+
     public function mesa()
     {
         return $this->belongsTo(Mesa::class);

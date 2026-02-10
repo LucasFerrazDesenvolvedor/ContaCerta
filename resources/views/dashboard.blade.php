@@ -1,60 +1,117 @@
 <x-app-layout>
 
-    <div class="p-6">
+    <!-- Google Fonts (opcional, deixa mais bonito) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <x-slot name="header">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+            🍽️ Painel de Controle
+        </h2>
+    </x-slot>
 
-        <h1 class="text-2xl font-bold mb-6">
-            Painel do Sistema
-        </h1>
+    <div class="py-10">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Abrir Comanda -->
-            <a href="{{ route('comandas.create') }}"
-                class="bg-green-500 text-white p-6 rounded-xl shadow hover:bg-green-600">
+                <!-- Abrir Comanda -->
+                <a href="{{ route('comandas.create') }}"
+                    class="group bg-gradient-to-r from-green-500 to-green-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
 
-                <h2 class="text-xl font-bold">Abrir Comanda</h2>
-                <p>Iniciar atendimento</p>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            🧾
+                        </div>
 
-            </a>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Abrir Comanda</h3>
+                            <p class="text-green-100">Novo atendimento</p>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- Estoque -->
-            <a href="{{ route('produtos.index') }}"
-                class="bg-blue-500 text-white p-6 rounded-xl shadow hover:bg-blue-600">
+                <!-- Produtos -->
+                <a href="{{ route('produtos.index') }}"
+                    class="group bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
 
-                <h2 class="text-xl font-bold">Estoque</h2>
-                <p>Gerenciar produtos</p>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            📦
+                        </div>
 
-            </a>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Estoque</h3>
+                            <p class="text-blue-100">Gerenciar produtos</p>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- Mesas -->
-            <a href="{{ route('mesas.index') }}"
-                class="bg-purple-500 text-white p-6 rounded-xl shadow hover:bg-purple-600">
+                <!-- Mesas -->
+                <a href="{{ route('mesas.index') }}"
+                    class="group bg-gradient-to-r from-amber-500 to-orange-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
 
-                <h2 class="text-xl font-bold">Mesas</h2>
-                <p>Visualizar mesas</p>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            🍽️
+                        </div>
 
-            </a>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Mesas</h3>
+                            <p class="text-amber-100">Visualizar mesas</p>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- Comandas Abertas -->
-            <a href="{{ route('comandas.index') }}"
-                class="bg-yellow-500 text-white p-6 rounded-xl shadow hover:bg-yellow-600">
+                <!-- Comandas Abertas -->
+                <a href="{{ route('comandas.index') }}"
+                    class="group bg-gradient-to-r from-purple-500 to-purple-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
 
-                <h2 class="text-xl font-bold">Comandas Abertas</h2>
-                <p>Ver atendimentos ativos</p>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            🔥
+                        </div>
 
-            </a>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Comandas Abertas</h3>
+                            <p class="text-purple-100">Pedidos ativos</p>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- Comandas Fechadas -->
-            <a href="{{ route('comandas.index', ['status' => 'fechada']) }}"
-                class="bg-red-500 text-white p-6 rounded-xl shadow hover:bg-red-600">
+                <!-- Comandas Fechadas -->
+                <a href="{{ route('comandas.index') }}"
+                    class="group bg-gradient-to-r from-red-500 to-red-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
 
-                <h2 class="text-xl font-bold">Comandas Fechadas</h2>
-                <p>Histórico de vendas</p>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            ✅
+                        </div>
 
-            </a>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Comandas Fechadas</h3>
+                            <p class="text-red-100">Histórico</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Relatórios -->
+                <a href="#"
+                    class="group bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            📊
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Relatórios</h3>
+                            <p class="text-gray-300">Análises</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
 
         </div>
-
     </div>
-
 </x-app-layout>
