@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class MesaController extends Controller
 {
+
+    public function show(Mesa $mesa)
+    {
+        return view('mesas.show', compact('mesa'));
+    }
+
     public function index()
     {
         $mesas = Mesa::all();
@@ -20,7 +26,11 @@ class MesaController extends Controller
 
     public function store(Request $request)
     {
-        Mesa::create($request->all());
+        Mesa::create([
+            'numero' => $request->numero,
+            'status' => 'livre'
+        ]);
+
         return redirect()->route('mesas.index');
     }
 
@@ -41,4 +51,3 @@ class MesaController extends Controller
         return redirect()->route('mesas.index');
     }
 }
-

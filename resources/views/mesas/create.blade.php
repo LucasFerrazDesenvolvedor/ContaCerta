@@ -1,15 +1,15 @@
 <x-app-layout>
     <div class="p-6">
 
-        <h1>Nova Mesa</h1>
+        <h1>Criar Mesa</h1>
 
-        <form action="{{ route('mesas.store') }}" method="POST">
+        <form method="POST" action="{{ route('mesas.store') }}">
             @csrf
 
-            <input type="text" name="nome" placeholder="Nome da Mesa" required>
+            <input type="text" name="numero" placeholder="Número da Mesa" required>
 
-            <button class="bg-green-500 text-white px-4 py-2">
-                Salvar
+            <button type="submit">
+                Cadastrar
             </button>
 
         </form>

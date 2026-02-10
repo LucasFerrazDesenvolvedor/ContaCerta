@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('numero')->unique();
             $table->string('status')->default('livre');
             $table->timestamps();
         });

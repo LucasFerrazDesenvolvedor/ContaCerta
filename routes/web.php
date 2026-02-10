@@ -16,6 +16,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mesas', MesaController::class);
 });
 
+Route::resource('mesas', MesaController::class)
+    ->except(['show']);
+
+
 Route::resource('produtos', ProdutoController::class);
 Route::resource('comandas', ComandaController::class);
 
