@@ -6,14 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model
 {
-    public function itens()
-    {
-        return $this->hasMany(ComandaItem::class);
-    }
     protected $fillable = [
+        'categoria',
         'nome',
+        'descricao',
         'preco',
-        'estoque',
-        'estoque_minimo'
+        'controla_estoque',
+        'ativo'
     ];
+
+    public function estoque()
+    {
+        return $this->hasOne(Estoque::class);
+    }
+
+    public function pedidoItens()
+    {
+        return $this->hasMany(PedidoItem::class);
+    }
 }

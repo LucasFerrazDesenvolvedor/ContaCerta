@@ -11,22 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mesas', function (Blueprint $table) {
+        Schema::create('estoque', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero')->unique();
-            $table->integer('capacidade')->default(1);
-            $table->string('status')->default('livre'); // livre, ocupada, reservada
+
+            $table->foreignId('produto_id')
+                ->constrained('produtos')
+                ->cascadeOnDelete()
+                ->unique();
+
+            $table->integer('quantidade_atual')->default(0);
+            $table->integer('estoque_minimo')->default(0);
+
             $table->timestamps();
         });
     }
-
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('mesas');
+        Schema::dropIfExists('estoques');
     }
 };

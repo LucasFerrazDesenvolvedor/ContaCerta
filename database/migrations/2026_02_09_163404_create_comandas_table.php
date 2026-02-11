@@ -13,10 +13,24 @@ return new class extends Migration
     {
         Schema::create('comandas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mesa_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained();
+
+            $table->foreignId('mesa_id')
+                ->nullable()
+                ->constrained('mesas')
+                ->nullOnDelete();
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
+            $table->string('cliente_nome')->nullable();
+            $table->string('status')->default('aberta'); // aberta, fechada, cancelada
+
             $table->decimal('total', 10, 2)->default(0);
-            $table->string('status')->default('aberta');
+
+            $table->timestamp('aberta_em')->nullable();
+            $table->timestamp('fechada_em')->nullable();
+
             $table->timestamps();
         });
     }

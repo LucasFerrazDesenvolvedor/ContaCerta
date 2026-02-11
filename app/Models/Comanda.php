@@ -9,8 +9,11 @@ class Comanda extends Model
     protected $fillable = [
         'mesa_id',
         'user_id',
+        'cliente_nome',
         'status',
-        'total'
+        'total',
+        'aberta_em',
+        'fechada_em'
     ];
 
     public function mesa()
@@ -18,8 +21,18 @@ class Comanda extends Model
         return $this->belongsTo(Mesa::class);
     }
 
-    public function itens()
+    public function user()
     {
-        return $this->hasMany(ComandaItem::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
+
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class);
     }
 }

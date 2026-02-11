@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->string('categoria'); // Bebidas, Pratos, etc
             $table->string('nome');
+            $table->text('descricao')->nullable();
             $table->decimal('preco', 10, 2);
-            $table->integer('estoque')->default(0);
-            $table->integer('estoque_minimo')->default(5);
+            $table->boolean('controla_estoque')->default(true);
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }
