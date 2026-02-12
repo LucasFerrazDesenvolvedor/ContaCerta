@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ComandaController;
+use App\Http\Controllers\CardapioController;
+
 
 
 Route::get('/', function () {
@@ -15,6 +17,26 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//NOVA ROTA ADICIONADA PARA UMA TELA DE CARDAPIO
+Route::get('/cardapio', [CardapioController::class, 'index'])
+    ->name('cardapio.index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Route::middleware(['auth'])->group(function () {

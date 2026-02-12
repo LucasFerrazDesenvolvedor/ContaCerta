@@ -10,9 +10,11 @@ class Produto extends Model
         'categoria',
         'nome',
         'descricao',
+        'imagem',
+        'tamanho',
         'preco',
         'controla_estoque',
-        'ativo'
+        'ativo',
     ];
 
     public function estoque()
