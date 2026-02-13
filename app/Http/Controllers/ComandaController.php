@@ -73,53 +73,60 @@ class ComandaController extends Controller
     }
 
     public function abertas()
-{
-    $comandas = Comanda::where('status', 'aberta')->get();
+    {
+        $comandas = Comanda::where('status', 'aberta')->get();
 
-    return view('comandas.abertas', compact('comandas'));
-}
+        return view('comandas.abertas', compact('comandas'));
+    }
 
-public function fechadas()
-{
-    $comandas = Comanda::where('status', 'fechada')->get();
+    public function fechadas()
+    {
+        $comandas = Comanda::where('status', 'fechada')->get();
 
-    return view('comandas.fechadas', compact('comandas'));
-}
+        return view('comandas.fechadas', compact('comandas'));
+    }
 
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'mesa_id' => 'required|exists:mesas,id',
-    ]);
+    {
+        $request->validate([
+            'mesa_id' => 'required|exists:mesas,id',
+        ]);
 
-    // Criar comanda
-    $comanda = Comanda::create([
-        'mesa_id' => $request->mesa_id,
-        'user_id' => Auth::id(), // <-- AQUI ESTÁ A CORREÇÃO
-        'status' => 'aberta',
-        'total' => 0
-    ]);
+        // Criar comanda
+        $comanda = Comanda::create([
+            'mesa_id' => $request->mesa_id,
+            'user_id' => Auth::id(), // <-- AQUI ESTÁ A CORREÇÃO
+            'status' => 'aberta',
+            'total' => 0
+        ]);
 
-    // Atualizar mesa
-    Mesa::where('id', $request->mesa_id)
-        ->update(['status' => 'ocupada']);
+        // Atualizar mesa
+        Mesa::where('id', $request->mesa_id)
+            ->update(['status' => 'ocupada']);
 
-    return redirect()
-        ->route('comandas.show', $comanda->id)
-        ->with('success', 'Comanda aberta com sucesso!');
-}
+        return redirect()
+            ->route('comandas.show', $comanda->id)
+            ->with('success', 'Comanda aberta com sucesso!');
+    }
 
 
     public function create()
-{
-    $mesas = \App\Models\Mesa::where('status','livre')->get();
+    {
+        $mesas = Mesa::all();
 
-    return view('comandas.create', compact('mesas'));
-}
+        $produtos = Produto::all();
+
+        // 👇 pega categorias únicas da coluna categoria
+        $categorias = Produto::select('categoria')
+            ->distinct()
+            ->pluck('categoria');
+
+        return view('comandas.create', compact('mesas', 'produtos', 'categorias'));
+    }
 
 
     /**

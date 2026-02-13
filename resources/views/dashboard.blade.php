@@ -30,6 +30,22 @@
                     </div>
                 </a>
 
+                <!-- Cardápio -->
+                <a href="{{ route('cardapio.index') }}"
+                    class="group bg-gradient-to-r from-pink-500 to-rose-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+
+                    <div class="flex items-center gap-4">
+                        <div class="bg-white/20 p-4 rounded-full text-3xl">
+                            📖
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Cardápio</h3>
+                            <p class="text-pink-100">Visualizar produtos</p>
+                        </div>
+                    </div>
+                </a>
+
                 <!-- Produtos -->
                 <a href="{{ route('produtos.index') }}"
                     class="group bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
